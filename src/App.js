@@ -1,9 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-
 import CustomerTable from './customertable';
-
 
 
 function App() {

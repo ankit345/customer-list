@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import { isCellEnterEditModeKeys } from '@material-ui/data-grid';
+import Premiumicon from './check1.png';
+import nonpremimum from './remove.png'
     
 export class CustomerTable extends PureComponent {
 
@@ -65,7 +67,7 @@ export class CustomerTable extends PureComponent {
     }
 
     render() {
-       
+        
         return (
             <div>
                   <h1>Welcome to Customer List Assignment</h1>
@@ -101,9 +103,9 @@ export class CustomerTable extends PureComponent {
                                     <td>{tdata.email}</td>
                                     <td>{tdata.phone}</td>
                                     <td>{tdata.hasPremium == true ?
-                                    <p>has Premium</p>:
-                                    <p>not has Premium</p>}</td>
-                                    <td>{tdata.phone}</td>
+                                    <p><img className ="img_premimum"src={Premiumicon} /></p>:
+                                    <p><img className ="img_premimum"src={nonpremimum} /></p>}</td>
+                                    <td>{tdata.bids.amount}</td>
 
                                 </tr>
                             
