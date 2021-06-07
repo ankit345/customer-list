@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { isCellEnterEditModeKeys } from '@material-ui/data-grid';
 import Premiumicon from './check1.png';
 import nonpremimum from './remove.png'
+// import { useState } from 'React';
     
 export class CustomerTable extends PureComponent {
 
@@ -33,6 +34,18 @@ export class CustomerTable extends PureComponent {
 
     };
 
+   
+    changeText = (text) => {
+        if(text === "Min"){
+            text = "Max"
+            this.setState ({text})
+        }else if (text ==="Max"){
+            text = "Min"
+            this.setState ({text})
+        }
+      
+      } 
+    
     loadMoreData() {
 		const data = this.state.orgtableData;
 		
@@ -46,6 +59,7 @@ export class CustomerTable extends PureComponent {
 
     componentDidMount(){
         this.getData();
+        
     }
 
     getData() {
@@ -61,16 +75,18 @@ export class CustomerTable extends PureComponent {
                 this.setState({
                     pageCount: Math.ceil(data.length / this.state.perPage),
                     orgtableData :res.data,
-                    tableData:slice
+                    tableData:slice,
+                    text:"Min"
                 })
             });
     }
 
     render() {
-        
+        const { text } = this.state
         return (
             <div>
                   <h1>Welcome to Customer List Assignment</h1>
+                  <div className="pagination_control"> 
                   <ReactPaginate
                     previousLabel={"Prev"}
                     nextLabel={"Next"}
@@ -83,6 +99,7 @@ export class CustomerTable extends PureComponent {
                     containerClassName={"pagination"}
                     subContainerClassName={"pages pagination"}
                     activeClassName={"active"}/>
+                    </div>
                   <table border="1" id="customers">
                      <thead>
                          <th className="header">SNO</th>
@@ -105,8 +122,7 @@ export class CustomerTable extends PureComponent {
                                     <td>{tdata.hasPremium == true ?
                                     <p><img className ="img_premimum"src={Premiumicon} /></p>:
                                     <p><img className ="img_premimum"src={nonpremimum} /></p>}</td>
-                                    <td>{tdata.bids.amount}</td>
-
+                                    <td></td> 
                                 </tr>
                             
                           ))
